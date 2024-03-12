@@ -241,54 +241,59 @@ require('lazy').setup({
           name = 'launch - netcoredbg',
           request = 'launch',
           program = function()
-            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '\\bin\\Debug\\', 'file')
           end,
         },
       }
       -- Continue debugging (equivalent to F5)
       vim.keymap.set('n', '<F5>', function()
         require('dap').continue()
-      end)
+      end, { desc = 'Continue debugging' })
 
       -- Step over (equivalent to F10)
       vim.keymap.set('n', '<F10>', function()
         require('dap').step_over()
-      end)
+      end, { desc = 'Step over' })
 
       -- Step into (equivalent to F11)
       vim.keymap.set('n', '<F11>', function()
         require('dap').step_into()
-      end)
+      end, { desc = 'Step into' })
 
       -- Step out (equivalent to F12)
       vim.keymap.set('n', '<F12>', function()
         require('dap').step_out()
-      end)
+      end, { desc = 'Step out' })
 
       -- Toggle breakpoint (equivalent to <Leader>b)
       vim.keymap.set('n', '<Leader>b', function()
         require('dap').toggle_breakpoint()
-      end)
+      end, { desc = 'Toggle [b]reakpoint' })
 
       -- Set breakpoint with condition (equivalent to <Leader>B)
       vim.keymap.set('n', '<Leader>B', function()
         require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-      end)
+      end, { desc = 'Set [B]reakpoint with condition' })
 
       -- Set log point (equivalent to <Leader>lp)
       vim.keymap.set('n', '<Leader>lp', function()
         require('dap').set_breakpoint(nil, nil, vim.fn.input 'Log point message: ')
-      end)
+      end, { desc = 'Set [l]og [p]oint' })
 
       -- Open the REPL (equivalent to <Leader>dr)
       vim.keymap.set('n', '<Leader>dr', function()
         require('dap').repl.open()
-      end)
+      end, { desc = '[d]ebug [r]EPL' })
 
       -- Run the last configuration (equivalent to <Leader>dl)
       vim.keymap.set('n', '<Leader>dl', function()
         require('dap').run_last()
-      end)
+      end, { desc = '[d]ebug [l]ast configuration' })
+
+      -- Terminate the debugging session
+      vim.keymap.set('n', '<Leader>T', function()
+        require('dap').terminate()
+      end, { desc = '[T]erminate debugging session' })
     end,
   },
   {
@@ -355,12 +360,12 @@ require('lazy').setup({
           icons = {
             pause = '',
             play = '',
-            step_into = '',
-            step_over = '',
-            step_out = '',
+            step_into = '',
+            step_over = '',
+            step_out = '󰆸',
             step_back = '',
             run_last = '↻',
-            terminate = '□',
+            terminate = '',
           },
         },
         floating = {
