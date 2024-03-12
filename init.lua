@@ -223,6 +223,34 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
+
+  {
+    'mfussenegger/nvim-dap',
+    config = function()
+      local dap = require 'dap'
+
+      dap.adapters.coreclr = {
+        type = 'executable',
+        command = 'c:\\devel\\utils\\builtFromSource\\netcoredbg\\netcoredbg',
+        args = { '--interpreter=vscode' },
+      }
+
+      dap.configurations.cs = {
+        {
+          type = 'coreclr',
+          name = 'launch - netcoredbg',
+          request = 'launch',
+          program = function()
+            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+          end,
+        },
+      }
+      local nnoremap = function(lhs, rhs)
+        vim.keymap.set('n', lhs, rhs, { noremap = true, silent = true })
+      end
+      nnoremap('<F5>', require('dap').continue())
+    end,
+  },
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'Asheq/close-buffers.vim',
   {
@@ -886,7 +914,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  --  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you have a Nerd Font, set icons to an empty table which will use the
