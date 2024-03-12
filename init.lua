@@ -319,6 +319,16 @@ require('lazy').setup({
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
+  {
+    'bloznelis/before.nvim',
+    config = function()
+      local before = require 'before'
+      before.setup()
+
+      vim.keymap.set('n', '<C-h>', before.jump_to_last_edit, {})
+      vim.keymap.set('n', '<C-l>', before.jump_to_next_edit, {})
+    end,
+  },
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -626,9 +636,16 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        cmake = {},
         clangd = {},
         omnisharp = {},
+        vuels = {},
+        jsonls = {},
+        -- TODO:
+        -- disabled for now until I evaluate performace/functionaly seems
+        -- promising with omni slower initializing on larger mono repos
         -- csharp_ls = {},
+        --
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -710,6 +727,7 @@ require('lazy').setup({
       },
       formatters_by_ft = {
         lua = { 'stylua' },
+        cmake = { 'cmake_format' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
