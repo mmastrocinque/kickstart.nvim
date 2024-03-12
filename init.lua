@@ -229,6 +229,7 @@ require('lazy').setup({
     config = function()
       local dap = require 'dap'
 
+      -- https://github.com/Samsung/netcoredbg
       dap.adapters.coreclr = {
         type = 'executable',
         command = 'c:\\devel\\utils\\builtFromSource\\netcoredbg\\netcoredbg',
