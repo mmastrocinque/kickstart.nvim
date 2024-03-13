@@ -241,11 +241,12 @@ require('lazy').setup({
           type = 'coreclr',
           name = 'launch - netcoredbg',
           request = 'launch',
+          args = {"run"},
           program = function()
-            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '\\bin\\Debug\\', 'file')
+            return vim.fn.input('Path to dll', vim.fn.getcwd(), 'file')
           end,
-        },
       }
+    },
       -- Continue debugging (equivalent to F5)
       vim.keymap.set('n', '<F5>', function()
         require('dap').continue()
