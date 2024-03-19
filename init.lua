@@ -339,9 +339,10 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
       })
     end,
   },
+  'nvim-neotest/nvim-nio',
   {
     'rcarriga/nvim-dap-ui',
-    requires = { 'mfussenegger/nvim-dap' },
+    requires = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
     config = function()
       local dap, dapui = require 'dap', require 'dapui'
 
