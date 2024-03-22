@@ -885,10 +885,10 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
         vuels = {},
         jsonls = {},
         csharp_ls = {},
-        --
+        rust_analyzer = {},
         -- gopls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
